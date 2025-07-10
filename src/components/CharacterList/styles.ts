@@ -5,6 +5,11 @@ export const ListContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: ${theme.spacing.lg};
+
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.md};
+    margin: 0 ${theme.spacing.sm};
+  }
 `;
 
 export const Header = styled.div`
@@ -18,6 +23,11 @@ export const Title = styled.h1`
   font-size: 2.5rem;
   margin-bottom: ${theme.spacing.md};
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: ${theme.spacing.sm};
+  }
 `;
 
 export const Subtitle = styled.p`
@@ -33,6 +43,12 @@ export const Controls = styled.div`
   margin-bottom: ${theme.spacing.lg};
   flex-wrap: wrap;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: ${theme.spacing.sm};
+    margin-bottom: ${theme.spacing.md};
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -53,6 +69,12 @@ export const SearchInput = styled.input`
   &::placeholder {
     color: ${theme.colors.light};
     opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    min-width: auto;
+    width: 100%;
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 `;
 
@@ -79,6 +101,12 @@ export const ListCharacterGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: ${theme.spacing.lg};
   margin-top: ${theme.spacing.lg};
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.md};
+    margin-top: ${theme.spacing.md};
+  }
 `;
 
 export const ListErrorMessage = styled.div`

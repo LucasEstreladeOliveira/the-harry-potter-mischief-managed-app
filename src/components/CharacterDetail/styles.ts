@@ -6,6 +6,11 @@ export const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: ${theme.spacing.lg};
+
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.md};
+    margin: 0 ${theme.spacing.sm};
+  }
 `;
 
 export const BackButton = styled(Link)`
@@ -30,6 +35,11 @@ export const CharacterCard = styled.div`
   border-radius: ${theme.borderRadius.lg};
   padding: ${theme.spacing.xl};
   box-shadow: ${theme.shadows.lg};
+
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.lg};
+    border-radius: ${theme.borderRadius.md};
+  }
 `;
 
 export const CharacterHeader = styled.div`
@@ -39,6 +49,13 @@ export const CharacterHeader = styled.div`
   margin-bottom: ${theme.spacing.lg};
   flex-wrap: wrap;
   gap: ${theme.spacing.md};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: ${theme.spacing.lg};
+  }
 `;
 
 export const CharacterImageSection = styled.div`
@@ -46,6 +63,12 @@ export const CharacterImageSection = styled.div`
   align-items: flex-start;
   gap: ${theme.spacing.lg};
   flex: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: ${theme.spacing.md};
+  }
 `;
 
 export const CharacterImage = styled.div`
@@ -56,6 +79,12 @@ export const CharacterImage = styled.div`
   border: 3px solid ${theme.colors.gold};
   flex-shrink: 0;
   box-shadow: ${theme.shadows.md};
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 120px;
+    border-width: 2px;
+  }
 `;
 
 export const Image = styled.img`
@@ -89,12 +118,21 @@ export const CharacterName = styled.h1`
   font-size: 2.5rem;
   margin: 0 0 ${theme.spacing.md} 0;
   word-wrap: break-word;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: ${theme.spacing.sm};
+    text-align: center;
+  }
 `;
 
 export const FavoriteButton = styled.button<{ $isFavorite: boolean }>`
+  position: relative;
+  top: -8px;
+  right: -8px;
   background: ${props => props.$isFavorite ? theme.colors.gold : 'transparent'};
   color: ${props => props.$isFavorite ? theme.colors.dark : theme.colors.gold};
-  border: 2px solid ${theme.colors.gold};
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -110,6 +148,14 @@ export const FavoriteButton = styled.button<{ $isFavorite: boolean }>`
     background: ${theme.colors.gold};
     color: ${theme.colors.dark};
     transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    position: static;
+    margin-top: ${theme.spacing.md};
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
   }
 `;
 
@@ -157,6 +203,11 @@ export const InfoGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: ${theme.spacing.md};
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.sm};
+  }
 `;
 
 export const InfoItem = styled.div`

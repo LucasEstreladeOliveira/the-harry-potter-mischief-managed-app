@@ -13,4 +13,18 @@ export {
   isValidHouseId,
   getHouseColors,
   getHouseInfo
-} from './houseUtils'; 
+} from './houseUtils';
+
+// Configuration utilities
+export {
+  config,
+  getApiUrl,
+  validateApiConfig
+} from './config';
+
+// Device utilities
+export {
+  isMobile,
+  isMobileByUserAgent,
+  isMobileByScreenSize,
+} from './deviceUtils'; 

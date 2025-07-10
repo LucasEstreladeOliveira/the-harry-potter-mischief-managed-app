@@ -6,7 +6,8 @@ import {
   getCharacterInitials,
   handleImageError,
   isCharacterFavorite,
-  getFavoriteStar
+  getFavoriteStar,
+  config
 } from '../../utils';
 import { 
   Card, 
@@ -75,7 +76,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
             <Value>{character.actor}</Value>
           </InfoRow>
           
-          {character.house && character.house !== 'Unknown' && (
+          {character.house && character.house !== config.defaults.unknownValue && (
             <HouseBadge $house={character.house}>
               {character.house}
             </HouseBadge>

@@ -1,11 +1,16 @@
 import { Character } from '../types';
-
-const API_BASE_URL = 'https://hp-api.onrender.com/api';
+import { config, getApiUrl, validateApiConfig } from '../utils';
 
 export class ApiService {
   static async fetchCharacters(): Promise<Character[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/characters`);
+      // Validate API configuration
+      if (!validateApiConfig()) {
+        throw new Error('Invalid API configuration');
+      }
+
+      const response = await fetch(getApiUrl('characters'));
+      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -14,26 +19,26 @@ export class ApiService {
       // Add unique IDs to characters and handle missing data
       return data.map((character: any, index: number) => ({
         id: character.id || `char_${index}`,
-        name: character.name || 'Unknown',
+        name: character.name || config.defaults.unknownValue,
         alternate_names: character.alternate_names || [],
-        species: character.species || 'Unknown',
-        gender: character.gender || 'Unknown',
-        house: character.house || 'Unknown',
-        dateOfBirth: character.dateOfBirth || 'Unknown',
+        species: character.species || config.defaults.unknownValue,
+        gender: character.gender || config.defaults.unknownValue,
+        house: character.house || config.defaults.unknownValue,
+        dateOfBirth: character.dateOfBirth || config.defaults.unknownValue,
         yearOfBirth: character.yearOfBirth || null,
         wizard: character.wizard || false,
-        ancestry: character.ancestry || 'Unknown',
-        eyeColour: character.eyeColour || 'Unknown',
-        hairColour: character.hairColour || 'Unknown',
+        ancestry: character.ancestry || config.defaults.unknownValue,
+        eyeColour: character.eyeColour || config.defaults.unknownValue,
+        hairColour: character.hairColour || config.defaults.unknownValue,
         wand: {
-          wood: character.wand?.wood || 'Unknown',
-          core: character.wand?.core || 'Unknown',
+          wood: character.wand?.wood || config.defaults.unknownValue,
+          core: character.wand?.core || config.defaults.unknownValue,
           length: character.wand?.length || null
         },
-        patronus: character.patronus || 'Unknown',
+        patronus: character.patronus || config.defaults.unknownValue,
         hogwartsStudent: character.hogwartsStudent || false,
         hogwartsStaff: character.hogwartsStaff || false,
-        actor: character.actor || 'Unknown',
+        actor: character.actor || config.defaults.unknownValue,
         alternate_actors: character.alternate_actors || [],
         alive: character.alive || false,
         image: character.image || ''

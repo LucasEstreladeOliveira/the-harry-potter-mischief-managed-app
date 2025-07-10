@@ -8,7 +8,8 @@ import {
   getCharacterInitials,
   handleImageError,
   isCharacterFavorite,
-  getFavoriteStar
+  getFavoriteStar,
+  config
 } from '../../utils';
 import LoadingSpinner from '../LoadingSpinner';
 import { BackButton, CharacterCard, CharacterHeader, CharacterImage, CharacterImageSection, CharacterInfo, CharacterName, Container, ErrorMessage, FavoriteButton, HouseBadge, Image, InfoGrid, InfoItem, InfoSection, Label, PlaceholderImage, SectionTitle, StatusBadge, Value, WandInfo } from './styles';
@@ -96,7 +97,7 @@ const CharacterDetail: React.FC = () => {
                   {character.alive ? 'Alive' : 'Deceased'}
                 </StatusBadge>
               </CharacterName>
-              {character.house && character.house !== 'Unknown' && (
+              {character.house && character.house !== config.defaults.unknownValue && (
                 <HouseBadge $house={character.house}>
                   {character.house}
                 </HouseBadge>
@@ -138,7 +139,7 @@ const CharacterDetail: React.FC = () => {
             </InfoItem>
             <InfoItem>
               <Label>Year of Birth</Label>
-              <Value>{character.yearOfBirth || 'Unknown'}</Value>
+              <Value>{character.yearOfBirth || config.defaults.unknownValue}</Value>
             </InfoItem>
           </InfoGrid>
         </InfoSection>
@@ -176,7 +177,7 @@ const CharacterDetail: React.FC = () => {
                 </InfoItem>
                 <InfoItem>
                   <Label>Length</Label>
-                  <Value>{character.wand.length ? `${character.wand.length} inches` : 'Unknown'}</Value>
+                  <Value>{character.wand.length ? `${character.wand.length} inches` : config.defaults.unknownValue}</Value>
                 </InfoItem>
               </InfoGrid>
             </WandInfo>

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { Character, AppState, HouseId } from '../types';
+import { AppState, HouseId } from '../types';
 import { ApiService } from '../services/api';
+import { config } from '../utils';
 
 interface AppAction {
   type: string;
@@ -60,22 +61,22 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: 'ADD_TO_FAVORITES', payload: characterId });
     // Save to localStorage
     const updatedFavorites = [...state.favorites, characterId];
-    localStorage.setItem('hp-favorites', JSON.stringify(updatedFavorites));
+    localStorage.setItem(config.app.localStorageKeys.favorites, JSON.stringify(updatedFavorites));
   };
 
   const removeFromFavorites = (characterId: string) => {
     dispatch({ type: 'REMOVE_FROM_FAVORITES', payload: characterId });
     // Save to localStorage
     const updatedFavorites = state.favorites.filter(id => id !== characterId);
-    localStorage.setItem('hp-favorites', JSON.stringify(updatedFavorites));
+    localStorage.setItem(config.app.localStorageKeys.favorites, JSON.stringify(updatedFavorites));
   };
 
   const setSelectedHouse = (house: HouseId | null) => {
     dispatch({ type: 'SET_SELECTED_HOUSE', payload: house });
     if (house) {
-      localStorage.setItem('hp-selected-house', house);
+      localStorage.setItem(config.app.localStorageKeys.selectedHouse, house);
     } else {
-      localStorage.removeItem('hp-selected-house');
+      localStorage.removeItem(config.app.localStorageKeys.selectedHouse);
     }
   };
 
@@ -85,14 +86,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const characters = await ApiService.fetchCharacters();
       dispatch({ type: 'SET_CHARACTERS', payload: characters });
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Unknown error' });
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : config.defaults.errorMessage });
     }
   };
 
   // Load saved data on mount
   useEffect(() => {
     // Load favorites
-    const savedFavorites = localStorage.getItem('hp-favorites');
+    const savedFavorites = localStorage.getItem(config.app.localStorageKeys.favorites);
     if (savedFavorites) {
       try {
         const favorites = JSON.parse(savedFavorites);
@@ -103,7 +104,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Load selected house
-    const savedHouse = localStorage.getItem('hp-selected-house');
+    const savedHouse = localStorage.getItem(config.app.localStorageKeys.selectedHouse);
     if (savedHouse) {
       dispatch({ type: 'SET_SELECTED_HOUSE', payload: savedHouse });
     }

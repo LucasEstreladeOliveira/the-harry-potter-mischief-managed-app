@@ -33,6 +33,15 @@ export const Card = styled.div<{ $house: string }>`
       return house ? `linear-gradient(90deg, ${house.colors[0]} 0%, ${house.colors[1]} 100%)` : theme.colors.gold;
     }};
   }
+
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.md};
+    border-radius: ${theme.borderRadius.md};
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
 `;
 
 export const CardHeader = styled.div`
@@ -40,6 +49,10 @@ export const CardHeader = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: ${theme.spacing.md};
+
+  @media (max-width: 768px) {
+    gap: ${theme.spacing.sm};
+  }
 `;
 
 export const CharacterImage = styled.div`
@@ -50,6 +63,13 @@ export const CharacterImage = styled.div`
   margin-right: ${theme.spacing.md};
   border: 2px solid ${theme.colors.gold};
   flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 70px;
+    height: 70px;
+    margin-right: ${theme.spacing.sm};
+    border-width: 1px;
+  }
 `;
 
 export const Image = styled.img`
@@ -81,12 +101,19 @@ export const CharacterName = styled.h3`
   color: ${theme.colors.gold};
   font-size: 1.3rem;
   margin: 0 0 ${theme.spacing.xs} 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin: 0 0 ${theme.spacing.xs} 0;
+  }
 `;
 
 export const FavoriteButton = styled.button<{ $isFavorite: boolean }>`
+  position: relative;
+  top: -8px;
+  right: -8px;
   background: ${props => props.$isFavorite ? theme.colors.gold : 'transparent'};
   color: ${props => props.$isFavorite ? theme.colors.dark : theme.colors.gold};
-  border: 2px solid ${theme.colors.gold};
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -102,6 +129,14 @@ export const FavoriteButton = styled.button<{ $isFavorite: boolean }>`
     background: ${theme.colors.gold};
     color: ${theme.colors.dark};
     transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+    position: static;
+    margin-left: auto;
   }
 `;
 
